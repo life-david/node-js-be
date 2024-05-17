@@ -1,9 +1,9 @@
 const app = require("./src/app");
 
-const PORT = 3001;
+const PORT = process.env.DEV_APP_PORT || process.env.DEV_APP_PRO || 3001;
 
-const server = app.listen(3001,()=>{
-    console.log('Server was run port 3001')
+const server = app.listen(PORT,()=>{
+    console.log('Server express running on port: '+PORT)
 });
 
 process.on('SIGINT',()=>{

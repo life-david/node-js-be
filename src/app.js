@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const appRoutes = require('./routes/app.routes');
@@ -17,4 +18,4 @@ require('./dbs/init.mongodb');
 
 //handling error
 
-module.exports  = app
+module.exports = app;
