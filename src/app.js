@@ -15,9 +15,6 @@ app.use('/', appRoutes);
 //init db
 require('./dbs/init.mongodb');
 
-
-
-
 //handling error
 
 module.exports  = app
