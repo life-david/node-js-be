@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const os = require('os');
 const process = require('process');
 const _SECOND = 5000;
+
 // count connect
 const coutConnect = () => {
     const numConnect = mongoose.connections.length;
