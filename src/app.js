@@ -10,9 +10,9 @@ const app = express();
 
 // cors
 app.use(
-  cors({
-    origin: "*",
-  })
+    cors({
+        origin: "*",
+    })
 );
 //init middelwares
 app.use(express.json());
@@ -24,30 +24,30 @@ app.use(morgan("dev"));
 app.use("/api", appRoutes);
 
 app.get("/", (req, res) => {
-  res.status(200).json({
-    msg: "Hello World!",
-  });
+    res.status(200).json({
+        msg: "Hello World!",
+    });
 });
 
 //handling error
 app.use((req, res, next) => {
-  const error = new Error("Not found");
-  error.status = 404;
-  next(error);
+    const error = new Error("Not found");
+    error.status = 404;
+    next(error);
 });
 
 app.use((error, req, res, next) => {
-  console.log(error);
-  const status = error.status || 500;
-  // const method = req.method;
-  // const path = req.path;
+    // console.log(error);
+    const status = error.status || 500;
+    // const method = req.method;
+    // const path = req.path;
 
-  res.status(status).json({
-    // method: method,
-    // path: path,
-    status: status,
-    message: error.message,
-  });
+    res.status(status).json({
+        // method: method,
+        // path: path,
+        status: status,
+        message: error.message,
+    });
 });
 
 module.exports = app;
