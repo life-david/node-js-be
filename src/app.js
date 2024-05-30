@@ -37,7 +37,7 @@ app.use((req, res, next) => {
 });
 
 app.use((error, req, res, next) => {
-    // console.log(error);
+    console.log(error);
     const status = error.status || 500;
     // const method = req.method;
     // const path = req.path;

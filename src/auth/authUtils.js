@@ -90,10 +90,14 @@ module.exports = {
         if (!accessToken) throw new AuthFailureError("Token is required");
 
         try {
-            const decoded = await jwt.verify(accessToken, keyStore.publicKey);
-            if (userId !== decoded.userId)
+            const decodedUser = await jwt.verify(
+                accessToken,
+                keyStore.publicKey
+            );
+            if (userId !== decodedUser.userId)
                 throw new AuthFailureError("Invalid token");
             req.keyStore = keyStore;
+            req.user = decodedUser;
             return next();
         } catch (error) {
             throw error;

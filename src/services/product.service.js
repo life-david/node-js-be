@@ -6,12 +6,9 @@ const { product, clothing, electronics } = require("../models/product.model");
 class ProductFactory {
     static async createProduct(type, data) {
         switch (type) {
-            case "product":
-                return await product.create(data);
-            case "clothing":
-                return await clothing.create(data);
-            case "electronics":
-                return await electronics.create(data);
+            case "Clothing":
+                // console.log(data);
+                return new Clothing(data).createProduct();
             default:
                 throw new Error("Type product not found");
         }
@@ -75,15 +72,25 @@ class Product {
     }
 
     // create product
-    async create() {
-        return await product.create(this);
+    async createNewProduct(product_id) {
+        return await product.create({ ...this, _id: product_id });
     }
 }
 
 //define
 class Clothing extends Product {
-    async create() {
-        const newClothing = await clothing.create(this.product_atributes);
+    async createProduct() {
+        const newClothing = await clothing.create({
+            ...this.product_atributes,
+            product_shop: this.product_shop,
+        });
         if (!newClothing) throw new BadRequestError("Create clothing failed");
+
+        const newProduct = await super.createNewProduct(newClothing._id);
+        if (!newProduct) throw new BadRequestError("Create new product error");
+
+        return newProduct;
     }
 }
+
+module.exports = ProductFactory;
