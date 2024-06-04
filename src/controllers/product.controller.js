@@ -1,4 +1,5 @@
 const ProductService = require("../services/product.service");
+const ProductService2 = require("../services/product.service.xxx");
 const { CREATED, OK, SuccessResponse } = require("../core/success.response");
 
 class ProductController {
@@ -11,7 +12,15 @@ class ProductController {
             }),
         }).send(res);
     }
-
+    static async createProduct2(req, res, next) {
+        new SuccessResponse({
+            message: "Product created successfully",
+            data: await ProductService2.createProduct(req.body.product_type, {
+                ...req.body,
+                product_shop: req.user.userId,
+            }),
+        }).send(res);
+    }
     static async getProduct(req, res, next) {
         new SuccessResponse({
             message: "Product fetch successfully",

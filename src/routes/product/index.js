@@ -8,5 +8,6 @@ route.use(authenticationV2);
 
 ////////////////////////
 route.post("/create", asyncHandler(productController.createProduct));
+route.post("/create2", asyncHandler(productController.createProduct2));
 
 module.exports = route;

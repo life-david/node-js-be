@@ -1,10 +1,10 @@
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
-const helmet = require("helmet");
 const compression = require("compression");
 require("./database/init.mongodb");
 require("dotenv").config();
+const helmet = require("helmet");
 const appRoutes = require("./routes");
 const app = express();
 
